@@ -24,41 +24,27 @@ This document marks the beginning of my **Self-Initiated Research** on JavaScrip
 **Known but Underutilized** - Closure-based private state with dual frontend/backend use:
 
 ```jsx
-// Closure-based rate limiter (used in UI buttons AND API endpoints)
-function createRateLimiter(maxRequests, interval) {
-  let lastReset = Date.now();
-  let requests = 0;
-
+// Create reusable state cycles with closure + array rotation
+function createStateCycler(...states) {
+  let current = 0;
   return {
-    attempt() {
-      if (Date.now() - lastReset > interval) {
-        requests = 0;
-        lastReset = Date.now();
-      }
-
-      if (requests < maxRequests) {
-        requests++;
-        return true;
-      }
-      return false;
+    next() {
+      const value = states[current];
+      current = (current + 1) % states.length;
+      return value;
     }
   };
 }
 
-// Frontend Usage (Button click limiter)
-const loginButtonLimiter = createRateLimiter(3, 10000);
-document.getElementById('login-btn').addEventListener('click', () => {
-  if (!loginButtonLimiter.attempt()) {
-    alert('Too many attempts! Wait 10 seconds');
-  }
+// Frontend Magic: Button color rotator
+const colorCycler = createStateCycler('red', 'green', 'blue');
+document.getElementById('action-btn').addEventListener('click', (e) => {
+  e.target.style.backgroundColor = colorCycler.next();
 });
 
-// Backend Usage (API rate limiting)
-const apiLimiter = createRateLimiter(100, 60000);
-app.post('/api', (req, res) => {
-  if (!apiLimiter.attempt()) {
-    return res.status(429).send('Too many requests');
-  }
-  // Process request
-});
+// Backend Brilliance: Database retry logic
+const retryCycler = createStateCycler('primary-db', 'replica-1', 'replica-2');
+function getDatabaseConnection() {
+  return connectToDB(retryCycler.next()); // Auto-cycles on failure
+}
 ```
