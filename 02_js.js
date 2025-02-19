@@ -91,8 +91,9 @@
 // const { firestName: name } = user;
 // console.log(name);
 
-const user = { details: { firstName: "Partha" } };
-const {
-  details: { firstName: name },
-} = user;
-console.log(name);
+// const user = { details: { firstName: "Partha" } };
+// const {
+//   details: { firstName: name },
+// } = user;
+// console.log(name);
+
