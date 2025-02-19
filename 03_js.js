@@ -59,5 +59,40 @@
 // }
 // console.log(multiply(5, 2, 3, 4));
 
-const [first, second, ...rest] = [1, 2, 3, 4, 5];
-console.log(...rest);
+// const [first, second, ...rest] = [1, 2, 3, 4, 5];
+// console.log(...rest);
+
+// // Spread (Expands elements)
+// const arr1 = [1, 2, 3];
+// const arr2 = [...arr1, 4, 5]; // [1, 2, 3, 4, 5]
+
+// // Rest (Gathers elements)
+// function sum(...numbers) {
+//   return numbers.reduce((acc, num) => acc + num, 0);
+// }
+// console.log(sum(1, 2, 3)); // 6
+
+// console.log([..."Hello"]);
+
+// const obj1 = { a: 1, b: 2 };
+// const obj2 = { b: 3, c: 4 };
+// const merged = { ...obj1, ...obj2 };
+// console.log(merged);  // { a: 1, b: 3, c: 4 } (b is overwritten)
+
+// const orginal = { a: 2, b: { c: 3 } };
+// const copy = { ...orginal };
+// copy.b.c = 42;
+// console.log(orginal.b.c);  // 42 (nested object is still linked)
+
+// const test = (...args) => console.log(args);
+// test(1, 2, 3);
+
+// const nums = [1, 2, 2, 3, 4, 4, 5];
+// const nonDuplicate = [...new Set(nums)];
+// console.log(nonDuplicate);
+
+// const obj = { name: "Partha", age: 20 };
+// const spread = { ...obj };
+// const assing = Object.assign({}, obj);
+
+// console.log(assing);
