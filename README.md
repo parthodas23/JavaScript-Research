@@ -21,30 +21,32 @@ This document marks the beginning of my **Self-Initiated Research** on JavaScrip
 
 ## 💡 Practical Code: The Closure Factory
 
-**Known but Underutilized** - Closure-based private state with dual frontend/backend use:
+How can closures be used to create private variables?
+The balance variable can't be accessed directly – it's protected inside the closure.
+
 
 ```jsx
-// Create reusable state cycles with closure + array rotation
-function createStateCycler(...states) {
-  let current = 0;
-  return {
-    next() {
-      const value = states[current];
-      current = (current + 1) % states.length;
-      return value;
-    }
-  };
+function bankAccount() {
+    let balance = 1000; // Private variable
+
+    return {
+        deposit: function (amount) {
+            balance += amount;
+            console.log(`New Balance: ${balance}`);
+        },
+        withdraw: function (amount) {
+            if (amount <= balance) {
+                balance -= amount;
+                console.log(`New Balance: ${balance}`);
+            } else {
+                console.log("Insufficient funds!");
+            }
+        }
+    };
 }
 
-// Frontend Magic: Button color rotator
-const colorCycler = createStateCycler('red', 'green', 'blue');
-document.getElementById('action-btn').addEventListener('click', (e) => {
-  e.target.style.backgroundColor = colorCycler.next();
-});
+const myAccount = bankAccount();
+myAccount.deposit(500);  // New Balance: 1500
+myAccount.withdraw(200); // New Balance: 1300
 
-// Backend Brilliance: Database retry logic
-const retryCycler = createStateCycler('primary-db', 'replica-1', 'replica-2');
-function getDatabaseConnection() {
-  return connectToDB(retryCycler.next()); // Auto-cycles on failure
-}
 ```
