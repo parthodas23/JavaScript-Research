@@ -19,7 +19,7 @@ This document marks the beginning of my **Self-Initiated Research** on JavaScrip
 
 ---
 
-## 💡 Practical Code: The Closure Factory
+## 💡 Practical Code: 
 
 How can closures be used to create private variables?
 The balance variable can't be accessed directly – it's protected inside the closure.
