@@ -1,6 +1,6 @@
 # JavaScript Research Document
 
-*Practical Magic Every Developer Should Master*
+*Practical Magic Every Developer Should Master *
 
 ---
 
